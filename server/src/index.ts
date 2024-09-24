@@ -30,7 +30,7 @@ app.post("/addEmail", addEmailController);
 app.post("/unsubscribe", removeEmailController);
 
 /* SERVER */
-const port = Number(process.env.port);
+const port = Number(process.env.port) || 80;
 console.log("PORT", port);
 app.listen(port, "0.0.0.0", () => {
   console.log("Server running on port ", port);
