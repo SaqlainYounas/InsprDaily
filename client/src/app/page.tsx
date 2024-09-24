@@ -21,8 +21,8 @@ export default function Home() {
         <p className="text-white text-lg">
           A simple service for your daily motivation.
           <br />
-          Give us your email and We'll send you an inspiring quote daily to help
-          you be motivated.
+          Give us your email and We will send you an inspiring quote daily to
+          help you be motivated.
         </p>
         <InputForm />
       </div>
