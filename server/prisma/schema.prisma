@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String         @id @default(cuid())
+  email      String         @unique
+  timeZone   Timezone       @relation(fields: [timeZoneId], references: [id])
+  timeZoneId String
+  emailLogs  EmailSentLog[] // One-to-many relation with EmailSentLog
+}
+
+model Timezone {
+  id     String  @id @default(cuid())
+  value  String  @unique // The IANA timezone string, e.g., "America/New_York"
+  label  String? // Optional: Store the display label
+  offset Int? // Optional: Store the offset from UTC
+  abbrev String? // Optional: Timezone abbreviation
+  users  User[] // One-to-many relation with User
+}
+
+model Quotes {
+  id    String @id @default(cuid())
+  quote String
+}
+
+model EmailSentLog {
+  id     String   @id @default(cuid())
+  userId String
+  sentAt DateTime
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
