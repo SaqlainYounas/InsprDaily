@@ -1,7 +1,6 @@
-import Image from "next/image";
-import {Poppins} from "next/font/google";
-import {cn} from "@/app/Lib/Utils";
-import {InputForm} from "@/components/Form/Input";
+import { Poppins } from "next/font/google";
+import { cn } from "@/app/Lib/Utils";
+import { InputForm } from "@/components/Form/Input";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -14,7 +13,7 @@ export default function Home() {
         <h1
           className={cn(
             "text-6xl font-semibold text-white drop-shadow-md ",
-            font.className,
+            font.className
           )}
         >
           Inspir Daily ✨
