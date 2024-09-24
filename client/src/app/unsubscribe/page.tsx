@@ -27,7 +27,6 @@ export default function Unsubscribe() {
         .then(() => {
           setSuccess("You are Unsubscribed!");
         });
-      //@ts-ignore
     } catch (error: any) {
       setError(error.data.message);
     }
@@ -38,7 +37,7 @@ export default function Unsubscribe() {
   }, [onSubmit]);
   return (
     <div className="flex h-full flex-col justify-center items-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
-      <div className='className="space-y-6 text-center"'>
+      <div className='className="space-y-6 text-center'>
         <h1
           className={
             "text-6xl font-semibold text-white drop-shadow-md text-center"

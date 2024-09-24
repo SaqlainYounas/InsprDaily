@@ -1,6 +1,6 @@
-"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 import * as z from "zod";
 import { useTransition, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -34,7 +34,7 @@ export const InputForm: React.FunctionComponent = () => {
   const [isPending, startTransition] = useTransition();
 
   // Get email and timezone from Redux
-  //@ts-ignore
+
   const { email, timeZone } = useSelector((state: any) => state.global);
 
   // Hook to fetch timezone options
@@ -83,7 +83,6 @@ export const InputForm: React.FunctionComponent = () => {
         }).unwrap();
 
         //setSuccess(data.message);
-        //@ts-ignore
       } catch (error: any) {
         //setError(error.data.message);
       }
