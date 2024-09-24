@@ -1,9 +1,11 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as z from "zod";
-import {useTransition, useEffect} from "react";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Button} from "@/components/ui/button";
+import { useTransition, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,23 +21,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {Input} from "@/components/ui/input";
-import {useAddUserEmailMutation} from "@/redux/state/stateApi";
-import {useDispatch, useSelector} from "react-redux"; // Import useDispatch and useSelector
+import { Input } from "@/components/ui/input";
+import { useAddUserEmailMutation } from "@/redux/state/stateApi";
+import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector
 
-import {ITimezone, useTimezoneSelect} from "react-timezone-select";
-import {FormSchema} from "@/app/Lib/Schema";
-import {setEmail} from "@/redux/state/state";
+import { useTimezoneSelect } from "react-timezone-select";
+import { FormSchema } from "@/app/Lib/Schema";
+import { setEmail } from "@/redux/state/state";
 
 export const InputForm: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const [isPending, startTransition] = useTransition();
 
   // Get email and timezone from Redux
-  const {email, timeZone} = useSelector((state: any) => state.global);
+  //@ts-ignore
+  const { email, timeZone } = useSelector((state: any) => state.global);
 
   // Hook to fetch timezone options
-  const {options, parseTimezone} = useTimezoneSelect({labelStyle: "original"});
+  const { options, parseTimezone } = useTimezoneSelect({
+    labelStyle: "original",
+  });
 
   const [addUserEmail] = useAddUserEmailMutation();
 
@@ -50,7 +55,7 @@ export const InputForm: React.FunctionComponent = () => {
 
   const {
     reset,
-    formState: {errors},
+    formState: { errors },
   } = form;
 
   // Dynamically reset form values when Redux state (email, timeZone) changes
@@ -63,21 +68,22 @@ export const InputForm: React.FunctionComponent = () => {
     }
   }, [email, timeZone, reset]);
   // Form submission
-  async function onSubmit({email, timeZone}: z.infer<typeof FormSchema>) {
+  async function onSubmit({ email, timeZone }: z.infer<typeof FormSchema>) {
     const sanitizedTimeZone = parseTimezone(timeZone);
 
     startTransition(async () => {
       try {
         // Dispatch to Redux store
-        dispatch(setEmail({email, timeZone: sanitizedTimeZone}));
+        dispatch(setEmail({ email, timeZone: sanitizedTimeZone }));
         console.log("EMI", email, timeZone);
         // Call the API
-        let data = await addUserEmail({
+        await addUserEmail({
           email,
           timeZone: sanitizedTimeZone,
         }).unwrap();
 
         //setSuccess(data.message);
+        //@ts-ignore
       } catch (error: any) {
         //setError(error.data.message);
       }
@@ -91,7 +97,7 @@ export const InputForm: React.FunctionComponent = () => {
           <FormField
             control={form.control}
             name="email"
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem className="text-start">
                 <FormLabel className="text-white">Email</FormLabel>
                 <FormControl>
@@ -110,7 +116,7 @@ export const InputForm: React.FunctionComponent = () => {
           <FormField
             control={form.control}
             name="timeZone"
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem className="text-start">
                 <FormLabel className="text-white">
                   Your Timezone - Please select a different timezone according

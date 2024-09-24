@@ -16,7 +16,7 @@ export default function Home() {
             font.className
           )}
         >
-          Inspir Daily ✨
+          Inspir Daily
         </h1>
         <p className="text-white text-lg">
           A simple service for your daily motivation.

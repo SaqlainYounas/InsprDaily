@@ -1,9 +1,9 @@
 "use client";
-import React, {useCallback, useEffect, useState} from "react";
-import {useSearchParams} from "next/navigation";
-import {FormSuccess} from "@/components/Form/FormSuccess";
-import {FormError} from "@/components/Form/FormError";
-import {useUnsubscribeMutation} from "@/redux/state/stateApi";
+import React, { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { FormSuccess } from "@/components/Form/FormSuccess";
+import { FormError } from "@/components/Form/FormError";
+import { useUnsubscribeMutation } from "@/redux/state/stateApi";
 export default function Unsubscribe() {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -22,11 +22,12 @@ export default function Unsubscribe() {
     }
     console.log("ID", id);
     try {
-      await unsubscribe({id})
+      await unsubscribe({ id })
         .unwrap()
         .then(() => {
           setSuccess("You are Unsubscribed!");
         });
+      //@ts-ignore
     } catch (error: any) {
       setError(error.data.message);
     }
