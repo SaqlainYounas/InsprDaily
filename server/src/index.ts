@@ -8,7 +8,7 @@ import {
   addEmailController,
   removeEmailController,
 } from "./controllers/emailController";
-import {scheduleDailyQuotes} from "./jobs/dailyEmail";
+import { scheduleDailyQuotes } from "./jobs/dailyEmail";
 const corsOptions = {
   origin: process.env.FRONTEND_HOST,
   credentials: true,
@@ -20,7 +20,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(cookieParser());
 app.use(cors(corsOptions));
@@ -31,6 +31,7 @@ app.post("/unsubscribe", removeEmailController);
 
 /* SERVER */
 const port = Number(process.env.port);
+console.log("PORT", port);
 app.listen(port, "0.0.0.0", () => {
   console.log("Server running on port ", port);
   scheduleDailyQuotes();
